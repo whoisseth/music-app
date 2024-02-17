@@ -55,7 +55,7 @@ export default function MusicPage() {
 
   const SEARCH_API = `https://saavn.dev/search/songs?query=${
     value || "india"
-  }&page=1&limit=10`;
+  }&page=1&limit=50`;
 
   // Trending_API api
   const { isLoading: isTrending_APISongsLoading, data: trending_APISongs } =
@@ -116,7 +116,7 @@ export default function MusicPage() {
                       {/* suggetsion box */}
 
                       {isSeachSuggetionOpen && (
-                        <div className="absolute left-0 top-10 z-10 grid max-h-[300px] w-full grid-cols-1 gap-3 overflow-auto   rounded border bg-secondary   p-2 md:grid-cols-2 lg:grid-cols-3   ">
+                        <div className="absolute left-0 top-10 z-10 grid max-h-[300px] w-full grid-cols-1 gap-3 overflow-x-auto   rounded border bg-secondary   p-2 md:grid-cols-2 lg:grid-cols-3   ">
                           {/* suggetsion box */}
 
                           {isSongsLoading && "loading"}

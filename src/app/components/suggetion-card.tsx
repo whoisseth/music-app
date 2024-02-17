@@ -14,7 +14,7 @@ export default function SuggetionCard(props: Props) {
     <div className="flex items-center gap-2">
       <button
         onClick={props.onClick}
-        className="group relative h-10 w-10 overflow-hidden rounded"
+        className="group relative h-10 min-h-10 w-10 min-w-10 overflow-hidden rounded"
       >
         <img
           height={40}
@@ -28,8 +28,14 @@ export default function SuggetionCard(props: Props) {
         </div>
       </button>
       <section className=" flex  flex-col">
-        <p className="text-sm font-semibold capitalize"> {props.name} </p>
-        <p className="text-xs capitalize"> {props.category} </p>
+        <p className="max-w-[140px] truncate text-sm font-semibold capitalize">
+          {" "}
+          {props.name}{" "}
+        </p>
+        <p className="max-w-[140px] truncate text-xs capitalize">
+          {" "}
+          {props.category}{" "}
+        </p>
       </section>
     </div>
   );
