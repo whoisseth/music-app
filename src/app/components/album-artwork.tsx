@@ -17,6 +17,7 @@ import {
 
 import { Album } from "../data/albums";
 import { playlists } from "../data/playlists";
+import { TbCloudDownload } from "react-icons/tb";
 
 interface AlbumArtworkProps extends React.HTMLAttributes<HTMLButtonElement> {
   aspectRatio?: "portrait" | "square";
@@ -25,6 +26,9 @@ interface AlbumArtworkProps extends React.HTMLAttributes<HTMLButtonElement> {
   img: string;
   name: string;
   category: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+
+  handleDownload?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
 export function AlbumArtwork({
@@ -35,13 +39,14 @@ export function AlbumArtwork({
   width,
   height,
   className,
+  onClick,
   ...props
 }: AlbumArtworkProps) {
   return (
     <button className={cn("space-y-3 ", className)} {...props}>
       <ContextMenu>
         <ContextMenuTrigger>
-          <div className="overflow-hidden rounded-md">
+          <button onClick={onClick} className="overflow-hidden rounded-md">
             <img
               src={img}
               alt={"song-img"}
@@ -52,7 +57,7 @@ export function AlbumArtwork({
                 aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square",
               )}
             />
-          </div>
+          </button>
         </ContextMenuTrigger>
         <ContextMenuContent className="w-40">
           <ContextMenuItem>Add to Library</ContextMenuItem>
@@ -92,9 +97,21 @@ export function AlbumArtwork({
           <ContextMenuItem>Share</ContextMenuItem>
         </ContextMenuContent>
       </ContextMenu>
-      <div className="space-y-1 text-sm">
-        <h3 className="font-medium leading-none">{name}</h3>
-        <p className="text-xs text-muted-foreground">{category}</p>
+      <div className="flex w-full justify-between gap-2   text-sm ">
+        <div className="space-y-1  text-sm  ">
+          <h3 className="flex  w-[200px] items-start truncate font-medium leading-none">
+            {name}
+          </h3>
+          <p className="flex items-start text-xs text-muted-foreground">
+            {category}
+          </p>
+        </div>
+        <button
+          onClick={props.handleDownload}
+          className=" flex h-6   w-6 items-center justify-center rounded-full bg-white/80 hover:bg-white/50 "
+        >
+          <TbCloudDownload size={16} className="text-xl text-gray-600 " />
+        </button>
       </div>
     </button>
   );

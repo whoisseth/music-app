@@ -34,6 +34,7 @@ import {
 import SuggetionCard from "./components/suggetion-card";
 import { useQuery } from "@tanstack/react-query";
 import { ApiResponse } from "./type";
+import { saveAs } from "file-saver";
 
 export default function MusicPage() {
   const [searchValue, setSearchValue] = useState("");
@@ -83,6 +84,10 @@ export default function MusicPage() {
     refetchSearch();
   }, [refetchSearch, value]);
 
+  function downloadImage(imgeUrl: string, imageName: string) {
+    saveAs(imgeUrl, `${imageName}.mp3`);
+  }
+
   console.log("songs", songs);
 
   return (
@@ -123,6 +128,9 @@ export default function MusicPage() {
                           {songs?.data.results.map((d, i) => (
                             <SuggetionCard
                               key={i}
+                              handleDownload={() =>
+                                downloadImage(d.downloadUrl[4].link, d.name)
+                              }
                               onClick={() => setMusicUrl(d.downloadUrl[4].link)}
                               // img="https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=300&dpr=2&q=80"
                               img={d.image[1].link}
@@ -166,6 +174,9 @@ export default function MusicPage() {
                                 ))
                             : loffiSongs?.data.results.map((d, i) => (
                                 <AlbumArtwork
+                                  handleDownload={() =>
+                                    downloadImage(d.downloadUrl[4].link, d.name)
+                                  }
                                   onClick={() =>
                                     setMusicUrl(d.downloadUrl[4].link)
                                   }
@@ -207,6 +218,9 @@ export default function MusicPage() {
                                 ))
                             : trending_APISongs?.data.results.map((d, i) => (
                                 <AlbumArtwork
+                                  handleDownload={() =>
+                                    downloadImage(d.downloadUrl[4].link, d.name)
+                                  }
                                   onClick={() =>
                                     setMusicUrl(d.downloadUrl[4].link)
                                   }
