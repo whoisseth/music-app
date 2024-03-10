@@ -8,12 +8,12 @@ type Album = {
 
 type Image = {
   quality: string;
-  link: string;
+  url: string;
 };
 
 type DownloadUrl = {
   quality: string;
-  link: string;
+  url: string;
 };
 
 type Song = {

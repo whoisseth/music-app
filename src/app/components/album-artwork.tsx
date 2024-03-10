@@ -1,5 +1,3 @@
-/** @format */
-
 import Image from "next/image";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 
@@ -97,18 +95,18 @@ export function AlbumArtwork({
           <ContextMenuItem>Share</ContextMenuItem>
         </ContextMenuContent>
       </ContextMenu>
-      <div className="flex w-full justify-between gap-2   text-sm ">
+      <div className="flex w-full justify-between gap-2   text-sm  ">
         <div className="space-y-1  text-sm  ">
-          <h3 className="flex  w-[200px] items-start truncate font-medium leading-none">
+          <h3 className="flex max-w-[100px] w-full   items-start truncate font-medium leading-none">
             {name}
           </h3>
-          <p className="flex items-start text-xs text-muted-foreground">
+          <p className="flex items-start whitespace-nowrap  truncate text-xs text-muted-foreground w-full max-w-[100px]">
             {category}
           </p>
         </div>
         <button
           onClick={props.handleDownload}
-          className=" flex h-6   w-6 items-center justify-center rounded-full bg-white/80 hover:bg-white/50 "
+          className=" flex h-6   w-6 items-center justify-center rounded-full bg-white/80 hover:bg-white/50  "
         >
           <TbCloudDownload size={16} className="text-xl text-gray-600 " />
         </button>

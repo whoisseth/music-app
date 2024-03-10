@@ -1,4 +1,3 @@
-/** @format */
 "use client";
 
 import Image from "next/image";
@@ -51,10 +50,12 @@ export default function MusicPage() {
     setSeachSuggetion(false);
   });
 
-  const Loffi_API = `https://saavn.dev/search/songs?query=loffi&page=1&limit=30`;
-  const Trending_API = `https://saavn.dev/search/songs?query=trending&page=1&limit=30`;
+  const main_api = "https://saavn.dev/api";
 
-  const SEARCH_API = `https://saavn.dev/search/songs?query=${
+  const Loffi_API = `${main_api}/search/songs?query=loffi&page=1&limit=30`;
+  const Trending_API = `${main_api}/search/songs?query=trending&page=1&limit=30`;
+
+  const SEARCH_API = `${main_api}/search/songs?query=${
     value || "india"
   }&page=1&limit=50`;
 
@@ -64,6 +65,9 @@ export default function MusicPage() {
       queryKey: ["treading-song"],
       queryFn: () => fetch(Trending_API).then((res) => res.json()),
     });
+
+  console.log("trending_APISongs-", trending_APISongs);
+
   // Loffi_API api
   const { isLoading: isLoffiSongsLoading, data: loffiSongs } =
     useQuery<ApiResponse>({
@@ -129,11 +133,11 @@ export default function MusicPage() {
                             <SuggetionCard
                               key={i}
                               handleDownload={() =>
-                                downloadImage(d.downloadUrl[4].link, d.name)
+                                downloadImage(d.downloadUrl[4].url, d.name)
                               }
-                              onClick={() => setMusicUrl(d.downloadUrl[4].link)}
+                              onClick={() => setMusicUrl(d.downloadUrl[4].url)}
                               // img="https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=300&dpr=2&q=80"
-                              img={d.image[1].link}
+                              img={d.image[1].url}
                               category={d.album.name}
                               name={d.name}
                             />
@@ -175,14 +179,14 @@ export default function MusicPage() {
                             : loffiSongs?.data.results.map((d, i) => (
                                 <AlbumArtwork
                                   handleDownload={() =>
-                                    downloadImage(d.downloadUrl[4].link, d.name)
+                                    downloadImage(d.downloadUrl[4].url, d.name)
                                   }
                                   onClick={() =>
-                                    setMusicUrl(d.downloadUrl[4].link)
+                                    setMusicUrl(d.downloadUrl[4].url)
                                   }
                                   key={i}
                                   name={d.name}
-                                  img={d.image[2].link}
+                                  img={d.image[2].url}
                                   category={d.album.name}
                                   className="w-[250px]"
                                   aspectRatio="portrait"
@@ -219,14 +223,14 @@ export default function MusicPage() {
                             : trending_APISongs?.data.results.map((d, i) => (
                                 <AlbumArtwork
                                   handleDownload={() =>
-                                    downloadImage(d.downloadUrl[4].link, d.name)
+                                    downloadImage(d.downloadUrl[4].url, d.name)
                                   }
                                   onClick={() =>
-                                    setMusicUrl(d.downloadUrl[4].link)
+                                    setMusicUrl(d.downloadUrl[4].url)
                                   }
                                   key={i}
                                   name={d.name}
-                                  img={d.image[2].link}
+                                  img={d.image[2].url}
                                   category={d.album.name}
                                   className="w-[150px]"
                                   aspectRatio="square"
